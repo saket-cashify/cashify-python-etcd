@@ -21,7 +21,7 @@ class CashifyETCD(object):
 		self.etcd_client = etcd.Client(host=host, protocol=protocol, port=port)
 		self.app_name = app_name
 
-	def get_property_value(self, key, service_version, default):
+	def get_property_value(self, key, default):
 		"""
 		Get property value from ETCD if not found return default
 		"""
@@ -29,7 +29,7 @@ class CashifyETCD(object):
 			required_key = self.app_name + '/' + self.app_name + '.' + key
 			value = self.get_value_cache(required_key)
 			if not value:
-				value = etcd_client.read(required_key).value
+				value = self.etcd_client.read(required_key).value
 				self.set_value_cache(required_key, value)
 			return value
 		except Exception as e:
@@ -45,4 +45,4 @@ class CashifyETCD(object):
 		"""
 		Set value in cache for 5 minutes
 		"""
-		cache.set(required_key, value, 300)
+		cache.set(key, value, 300)
