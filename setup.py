@@ -9,5 +9,8 @@ setup(
     author_email='saket.a@cashify.in',
     license='unlicense',
     packages=['cashifypythonetcd'],
+    install_requires=[
+        'python-etcd',
+    ],
     zip_safe=False
 )
