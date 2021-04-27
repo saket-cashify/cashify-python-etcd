@@ -3,7 +3,7 @@
 Cashify Python Repo to get Key values from ETCD.
 
 Pre-requisite:
-1. python-etcd library
+1. python-etcd library (https://pypi.org/project/python-etcd/)
 
 
 How to use:
