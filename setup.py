@@ -11,7 +11,7 @@ setup(
     name='cashifypythonetcd',
     version='0.0.1',
     description='Get configurable values from ETCD',
-    url='git@github.com:saket-cashify/cashify-python-etcd.git',
+    url='https://github.com/saket-cashify/cashify-python-etcd',
     author='Saket Agarwal',
     author_email='saket.a@cashify.in',
     license='unlicense',

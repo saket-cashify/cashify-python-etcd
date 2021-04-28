@@ -2,7 +2,7 @@ Metadata-Version: 2.1
 Name: cashifypythonetcd
 Version: 0.0.1
 Summary: Get configurable values from ETCD
-Home-page: git@github.com:saket-cashify/cashify-python-etcd.git
+Home-page: https://github.com/saket-cashify/cashify-python-etcd
 Author: Saket Agarwal
 Author-email: saket.a@cashify.in
 License: unlicense
