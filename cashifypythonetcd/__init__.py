@@ -41,10 +41,10 @@ class CashifyETCD(object):
 			if not self.proxy:
 				value = self.etcd_client.read(required_key).value
 			else:
-				required_key = '/' + required_key
+				_required_key = '/' + required_key
 				values = requests.get(url=self.proxy, headers=self.headers).json()
 				for _value in values.get('node').get('nodes'):
-					if _value.get('key') == required_key:
+					if _value.get('key') == _required_key:
 						value = _value.get('value')
 						break
 				self.set_value_cache(required_key, value)
