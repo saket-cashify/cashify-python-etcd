@@ -9,7 +9,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='cashifypythonetcd',
-    version='0.0.2',
+    version='0.0.3',
     description='Get configurable values from ETCD',
     url='https://github.com/saket-cashify/cashify-python-etcd',
     author='Saket Agarwal',
