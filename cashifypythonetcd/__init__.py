@@ -1,4 +1,5 @@
 import etcd
+import requests
 
 # Can also use python cache if we want to use it as generic
 # Currently using this for Django as use case
@@ -13,13 +14,20 @@ class CashifyETCD(object):
 
 	etcd_client = None
 	app_name = None
+	proxy = None
+	headers = None
 
-	def __init__(self, host, protocol, port, app_name):
+	def __init__(self, host, protocol, port, app_name, proxy=None, headers=None):
 
 		""" Get ETCD client"""
 
-		self.etcd_client = etcd.Client(host=host, protocol=protocol, port=port)
-		self.app_name = app_name
+		if not proxy:
+			self.etcd_client = etcd.Client(host=host, protocol=protocol, port=port)
+			self.app_name = app_name
+		else:
+			self.proxy = proxy
+			self.headers = headers
+			self.app_name = app_name
 
 	def get_property_value(self, key, default):
 		"""
@@ -28,8 +36,17 @@ class CashifyETCD(object):
 		try:
 			required_key = self.app_name + '/' + self.app_name + '.' + key
 			value = self.get_value_cache(required_key)
-			if not value:
+			if value:
+				return value
+			if not self.proxy:
 				value = self.etcd_client.read(required_key).value
+			else:
+				required_key = '/' + required_key
+				values = requests.get(url=self.proxy, headers=self.headers).json()
+				for _value in values.get('node').get('nodes'):
+					if _value.get('key') == required_key:
+						value = _value.get('value')
+						break
 				self.set_value_cache(required_key, value)
 			return value
 		except Exception as e:
